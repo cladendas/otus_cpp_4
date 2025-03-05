@@ -8,7 +8,6 @@
 // print_ip( std::list<shot>{400, 300, 200, 100} ); // 400.300.200.100 
 // print_ip( std::make_tuple(123, 456, 789, 0) ); // 123.456.789.0
 
-
 #include <iostream>
 #include <cstdint>
 #include <typeinfo>
