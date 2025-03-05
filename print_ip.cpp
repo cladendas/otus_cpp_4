@@ -13,6 +13,7 @@
 #include <cstdint>
 #include <typeinfo>
 #include <list>
+#include <vector>
 
 template <typename T>
 typename std::enable_if<std::is_arithmetic<T>::value>::type
