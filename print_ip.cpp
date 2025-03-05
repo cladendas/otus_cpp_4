@@ -45,6 +45,8 @@ print_ip(T value) {
     std::cout << std::endl;
 };
 
+//-------------------------------------------------//
+
 template <typename T>
 typename std::enable_if<std::is_arithmetic<T>::value>::type
 print_ip(T value) {
@@ -60,9 +62,7 @@ print_ip(T value) {
 //-------------------------------------------------//
 
 template<typename T>
-struct is_string {
-    static const bool value = false;
-};
+struct is_string : std::false_type{};
 
 
 template<>
@@ -82,9 +82,7 @@ print_ip(T value) {
 //-------------------------------------------------//
 
 template<typename T>
-struct is_vector_int {
-    static const bool value = false;
-};
+struct is_vector_int : std::false_type{};
 
 template<>
 struct is_vector_int<std::vector<int>> {
