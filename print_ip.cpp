@@ -15,6 +15,7 @@
 
 
 #include <iostream>
+#include <tuple>
 #include <cstdint>
 #include <typeinfo>
 #include <list>
@@ -89,6 +90,23 @@ struct is_vector_int<std::vector<int>> {
     static const bool value = true;
 };
 
+//-------------------------------------------------//
+
+template <typename Tuple, size_t Index = 0>
+void print_tuple_element(const Tuple& tuple) {
+    std::cout << std::get<Index>(tuple);
+    if constexpr (Index + 1 < std::tuple_size_v<Tuple>) {
+        std::cout << ".";
+        print_tuple_element<Tuple, Index + 1>(tuple);
+    }
+}
+
+template <typename... Types>
+void print_ip(const std::tuple<Types...>& tuple) {
+    print_tuple_element(tuple);
+    std::cout << std::endl;
+}
+
 int main() {
     print_ip( int8_t{-1} ); //255
     print_ip( int16_t{0} ); // 0.0 
@@ -97,7 +115,7 @@ int main() {
     print_ip( std::string{"Hello, World!"} );
     print_ip( std::vector<int>{100, 200, 300, 400} ); // 100.200.300.400
     print_ip( std::list<short>{400, 300, 200, 100} ); // 400.300.200.100
-    // print_ip( std::make_tuple(123, 456, 789, 0) ); // 123.456.789.0
+    print_ip( std::make_tuple(123, 456, 789, 0) ); // 123.456.789.0
 
     return 0;
 }
